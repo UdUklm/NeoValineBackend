@@ -7,12 +7,12 @@ class CommentModel(models.Model):
     """评论"""
     url = models.CharField(verbose_name='评论页面', max_length=256,
                            help_text='评论页面')
-    comment = models.CharField(verbose_name='评论', max_length=2048, unique=True,
+    comment = models.CharField(verbose_name='评论', max_length=2048,
                                help_text='评论')
     nickname = models.CharField(verbose_name='昵称', blank=True, null=True,
                                 max_length=64, help_text='昵称')
-    email = models.EmailField(verbose_name='邮箱', blank=True, null=True,
-                              help_text='邮箱')
+    mail = models.EmailField(verbose_name='邮箱', blank=True, null=True,
+                             help_text='邮箱')
     link = models.URLField(verbose_name='链接', blank=True, null=True,
                            help_text='链接')
     notified = models.BooleanField(verbose_name='已通知', default=False,

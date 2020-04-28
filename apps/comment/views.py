@@ -47,10 +47,10 @@ class ChildCommentViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
     queryset = CommentModel.objects.filter(display=True, rid__isnull=False,
                                            pid__isnull=False)
     serializer_class = CommentSerializer
-    pagination_class = CommentPagination
+    # pagination_class = CommentPagination
     filter_backends = (
         DjangoFilterBackend,
         filters.OrderingFilter
     )
-    filterset_fields = ['url', 'rid', 'pid']
+    filterset_fields = ['url']
     ordering_fields = ['ctime']
