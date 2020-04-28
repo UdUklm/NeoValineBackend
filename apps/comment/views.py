@@ -26,12 +26,31 @@ class CommentViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
     list: 获取评论列表
     detail: 评论详情
     """
-    queryset = CommentModel.objects.filter(display=True)  # 查询集过滤
+    queryset = CommentModel.objects.filter(display=True, rid=None, pid=None)
     serializer_class = CommentSerializer
     pagination_class = CommentPagination
     filter_backends = (
         DjangoFilterBackend,
         filters.OrderingFilter
     )
-    filterset_fields = ['url', 'pid', 'rid']
+    filterset_fields = ['url']
+    ordering_fields = ['ctime']
+
+
+class ReplyViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
+                   viewsets.GenericViewSet):
+    """
+    获取回复类的评论
+    list: 获取评论列表
+    detail: 评论详情
+    """
+    queryset = CommentModel.objects.filter(display=True, rid__isnull=False,
+                                           pid__isnull=False)
+    serializer_class = CommentSerializer
+    pagination_class = CommentPagination
+    filter_backends = (
+        DjangoFilterBackend,
+        filters.OrderingFilter
+    )
+    filterset_fields = ['url', 'rid', 'pid']
     ordering_fields = ['ctime']
