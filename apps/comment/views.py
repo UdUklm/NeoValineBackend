@@ -37,8 +37,8 @@ class CommentViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
     ordering_fields = ['ctime']
 
 
-class ReplyViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
-                   viewsets.GenericViewSet):
+class ChildCommentViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
+                          viewsets.GenericViewSet):
     """
     获取回复类的评论
     list: 获取评论列表

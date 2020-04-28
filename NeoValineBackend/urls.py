@@ -21,11 +21,11 @@ from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
 
 from apps.comment.views import CommentViewSet
-from apps.comment.views import ReplyViewSet
+from apps.comment.views import ChildCommentViewSet
 
 router = DefaultRouter()
 router.register(r'comment', CommentViewSet)
-router.register(r'reply', ReplyViewSet)
+router.register(r'childcomment', ChildCommentViewSet)
 
 
 urlpatterns = [
