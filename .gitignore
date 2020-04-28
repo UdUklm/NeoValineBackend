@@ -1,0 +1,9 @@
+.vscode
+.idea
+
+db.sqlite3
+venv
+
+NeoValineBackend/hidden_options.py
+**/migrations
+**/__pycache__
