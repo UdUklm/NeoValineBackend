@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'rest_framework',
     'django_filters',
+    'django_crontab',
     'apps.user.apps.UserConfig',
     'apps.comment.apps.CommentConfig',
 ]
@@ -142,6 +143,13 @@ DAILY_HELLO = {
         '最近有发生什么不开心的事情吗？'
     ]
 }
+
+# Django-crontab
+# https://github.com/kraiz/django-crontab
+CRONJOBS = [
+    ('*/10 * * * *', 'apps.utils.crontab.check_notice'),
+    ('5 7 * * *', 'apps.utils.crontab.daily_hello')
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/

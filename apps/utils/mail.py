@@ -66,11 +66,11 @@ class MailSender:
             return False
 
 
-def mail_admin_notice(post_url: str, nike_name: str, comment: str) -> bool:
+def mail_admin_notice(post_url: str, nick: str, comment: str) -> bool:
     """
     新评论提醒
     :param comment: 评论内容
-    :param nike_name: 评论者昵称
+    :param nick: 评论者昵称
     :param post_url: 文章 URL
     :return 邮件发送成功与否
     """
@@ -85,7 +85,7 @@ def mail_admin_notice(post_url: str, nike_name: str, comment: str) -> bool:
     color: #12ADDB;" href="%s" target="_blank"> %s </a>上的文章有了新的评论</h2>
     <p><strong>%s </strong>回复说：</p><div style="background-color: #f5f5f5;
     padding: 10px 15px;margin:18px 0;word-wrap:break-word;">%s</div></div>
-    """ % (post_url, site_name, nike_name, comment)
+    """ % (post_url, site_name, nick, comment)
     mail = MailSender(subject, body, service_name, SITE_INFO['ADMIN_MAIL'])
     mail.set_receiver_name(SITE_INFO['ADMIN_NAME'])
     return mail.send()

@@ -7,6 +7,7 @@ from rest_framework.response import Response
 
 from .models import CommentModel
 from .serializers import CommentSerializer
+from apps.utils.mail import mail_admin_notice
 
 
 class CommentPagination(pagination.PageNumberPagination):
@@ -35,6 +36,14 @@ class CommentViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
     )
     filterset_fields = ['url']
     ordering_fields = ['ctime']
+
+    def perform_create(self, serializer):
+        """
+        有新评论提交，提醒站长审核评论
+        """
+        data = serializer.save()
+        mail_admin_notice(post_url=data.url, nick=data.nick,
+                          comment=data.comment)
 
 
 class ChildCommentViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
