@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from .hidden_options import Hidden_SECRET_KEY
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +20,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = Hidden_SECRET_KEY
+from .hidden_options import HIDDEN_SECRET_KEY
+SECRET_KEY = HIDDEN_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'rest_framework',
     'django_filters',
+    'corsheaders',
     'apps.user.apps.UserConfig',
     'apps.comment.apps.CommentConfig',
 ]
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'user.UserModel'
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -116,6 +118,36 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
 
+# Django-CORS-Header
+# https://github.com/adamchainz/django-cors-headers
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = [
+
+]
+
+# gushici
+# https://github.com/xenv/gushici
+DAILY_HELLO = {
+    "AISHICI_URL": 'https://v1.jinrishici.com/all.json',
+    "SUBJECTS": [
+        '又要开始元气满满的一天了！',
+        '早安~',
+        '世界，你好！',
+        '今天天气怎么样~',
+        'I am alive as yet, hhh',
+        '今天的诗词又是什么呢~',
+        '今天变得更好了吗~',
+        '外面阳光好像不错呢~',
+        '嗯哼，看谁来了~',
+        '你正在干什么呢~',
+        '好久不见',
+        '感觉已经好久没见了',
+        '最近有在写随笔吗',
+        '最近都新学了些什么鸭？',
+        '最近有在更博客吗？',
+        '最近有什么有趣的事情发生吗？',
+    ]
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
