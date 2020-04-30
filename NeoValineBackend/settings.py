@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'rest_framework',
     'django_filters',
-    'corsheaders',
     'apps.user.apps.UserConfig',
     'apps.comment.apps.CommentConfig',
 ]
@@ -50,7 +49,6 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'user.UserModel'
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -118,12 +116,6 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
 
-# Django-CORS-Header
-# https://github.com/adamchainz/django-cors-headers
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = [
-
-]
 
 # gushici
 # https://github.com/xenv/gushici
@@ -146,6 +138,8 @@ DAILY_HELLO = {
         '最近都新学了些什么鸭？',
         '最近有在更博客吗？',
         '最近有什么有趣的事情发生吗？',
+        '最近有做什么开心的事情吗？',
+        '最近有发生什么不开心的事情吗？'
     ]
 }
 

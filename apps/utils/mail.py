@@ -117,13 +117,13 @@ def mail_display_notice(post_url: str, receiver: str, comment: str) -> bool:
     return mail.send()
 
 
-def mail_reply_notice(post_url: str, receiver: str, nick_name: str,
-                      comment: str, reply_nick_name: str, reply_comment: str):
+def mail_reply_notice(post_url: str, receiver: str, nick: str,
+                      comment: str, reply_nick: str, reply_comment: str):
     """
     评论回复提醒
     :param reply_comment: 回复者的评论
-    :param reply_nick_name: 回复者的昵称
-    :param nick_name: 原先评论者的昵称
+    :param reply_nick: 回复者的昵称
+    :param nick: 原先评论者的昵称
     :param receiver: 原先评论者的邮箱
     :param comment: 原先评论者的评论内容
     :param post_url: 文章 URL
@@ -144,7 +144,7 @@ def mail_reply_notice(post_url: str, receiver: str, nick_name: str,
     word-wrap:break-word;">%s</div><p>您可以点击<a style="text-decoration:none; 
     color:#12addb" href="%s" target="_blank">博客链接</a>查看回复的完整內容<br></p></div>
     </br></br>根据国家相关规定，网站评论需要先审核后显示，感谢您的理解</br>: )</p></div>
-    """ % (site_name, nick_name, comment, reply_nick_name, reply_comment,
+    """ % (site_name, nick, comment, reply_nick, reply_comment,
            post_url)
     mail = MailSender(subject, body, service_name, receiver)
     return mail.send()

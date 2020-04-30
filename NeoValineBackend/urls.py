@@ -13,7 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 import xadmin
@@ -24,13 +23,13 @@ from apps.comment.views import CommentViewSet
 from apps.comment.views import ChildCommentViewSet
 
 router = DefaultRouter()
-router.register(r'comment', CommentViewSet)
-router.register(r'childcomment', ChildCommentViewSet)
+router.register(r'api/comment', CommentViewSet)
+router.register(r'api/childcomment', ChildCommentViewSet)
 
 
 urlpatterns = [
     # path('api-auth/', include('rest_framework.urls')),
-    path(r'admin/', xadmin.site.urls),
-    path(r'doc/', include_docs_urls(title='API 文档')),
+    # path(r'api/doc/', include_docs_urls(title='API Doc')),
+    path(r'api/admin/', xadmin.site.urls),
     path('', include(router.urls)),
 ]
