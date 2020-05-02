@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.contrib.staticfiles.views import serve
 from django.urls import path
 from django.conf.urls import include
 import xadmin
@@ -21,15 +22,18 @@ from rest_framework.routers import DefaultRouter
 
 from apps.comment.views import CommentViewSet
 from apps.comment.views import ChildCommentViewSet
+from NeoValineBackend.settings import STATIC_ROOT
 
 router = DefaultRouter()
+router.register(r'api/admin/', xadmin.site.urls)
 router.register(r'api/comment', CommentViewSet)
 router.register(r'api/childcomment', ChildCommentViewSet)
+router.register(r'^static/(?P<path>.*)/$', serve, {'document_root': STATIC_ROOT})
 
 
 urlpatterns = [
     # path('api-auth/', include('rest_framework.urls')),
     # path(r'api/doc/', include_docs_urls(title='API Doc')),
-    path(r'api/admin/', xadmin.site.urls),
+    # path(r'api/admin/', xadmin.site.urls),
     path('', include(router.urls)),
 ]
