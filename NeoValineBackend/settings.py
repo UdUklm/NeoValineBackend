@@ -114,7 +114,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Django-REST-framework
 # https://www.django-rest-framework.org
 REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DATETIME_FORMAT': 'rest_framework.ISO_8601',
 }
 
 
@@ -155,8 +156,9 @@ CRONJOBS = [
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
 LANGUAGE_CODE = 'zh-hans'  # 界面为中文
-TIME_ZONE = 'Asia/Shanghai'  # 中国时区
-USE_TZ = False  # 数据库存储的不是国际时间而是本地时间
+# TIME_ZONE = 'Asia/Shanghai'  # 中国时区
+TIME_ZONE = 'UTC'  # 使用世界标准时间
+USE_TZ = True  # 数据库存储的不是国际时间而是本地时间
 
 USE_I18N = True
 

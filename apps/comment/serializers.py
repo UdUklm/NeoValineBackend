@@ -1,11 +1,12 @@
 from rest_framework import serializers
+from rest_framework import ISO_8601
 from .models import CommentModel
 
 
 class CommentSerializer(serializers.ModelSerializer):
     notified = serializers.BooleanField(read_only=True)
     display = serializers.BooleanField(read_only=True)
-    ctime = serializers.DateTimeField(read_only=True)
+    ctime = serializers.DateTimeField(read_only=True, format=ISO_8601)
 
     class Meta:
         model = CommentModel
