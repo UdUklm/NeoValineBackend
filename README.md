@@ -18,6 +18,6 @@ python manage.py makemigrations
 python manage.py migrate user
 python manage.py migrate comment
 python manage.py migrate
-python manage.py crontab add
 python manage.py createsuperuser
+python manage.py collectstatic
 ```
