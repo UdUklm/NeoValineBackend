@@ -5,8 +5,7 @@ class CommentModel(models.Model):
     """评论"""
     url = models.CharField(verbose_name='评论页面', max_length=256,
                            help_text='评论页面')
-    comment = models.CharField(verbose_name='评论', max_length=2048,
-                               help_text='评论')
+    comment = models.TextField(verbose_name='评论', help_text='评论')
     nick = models.CharField(verbose_name='昵称', blank=True, null=True,
                             max_length=64, help_text='昵称')
     mail = models.EmailField(verbose_name='邮箱', blank=True, null=True,
