@@ -12,6 +12,7 @@ class CommentModelAdmin(object):
     # 定义可搜索的范围, 不能设置时间, 涉及外键的时候和上面一样处理
     search_fields = ['id', 'url', 'comment', 'nick', 'mail', 'link', 'rid',
                      'pid', 'ip', 'ua']
+    readonly_fields = ['id', 'url', 'rid', 'pid', 'ip', 'ua']
 
 
 xadmin.site.register(CommentModel, CommentModelAdmin)
