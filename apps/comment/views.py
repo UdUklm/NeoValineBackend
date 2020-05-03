@@ -1,3 +1,5 @@
+from threading import Thread
+
 from rest_framework import mixins
 from rest_framework import viewsets
 from rest_framework import filters
@@ -43,8 +45,9 @@ class CommentViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
         有新评论提交，提醒站长审核评论
         """
         data = serializer.save()
-        mail_admin_notice(post_url=SITE_INFO['SITE_URL']+data.url,
-                          nick=data.nick, comment=data.comment)
+        Thread(target=mail_admin_notice, args=(SITE_INFO['SITE_URL']+data.url,
+                                               data.nick,
+                                               data.comment)).start()
 
 
 class ChildCommentViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
