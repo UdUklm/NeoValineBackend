@@ -3,12 +3,9 @@ from email.mime.text import MIMEText
 from email.header import Header
 from email.utils import formatdate
 from email.utils import formataddr
-import random
-import requests
 
 from NeoValineBackend.hidden_options import MAIL_SETTINGS
 from NeoValineBackend.hidden_options import SITE_INFO
-from NeoValineBackend.settings import DAILY_HELLO
 
 
 class MailSender:
@@ -147,27 +144,4 @@ def mail_reply_notice(post_url: str, receiver: str, nick: str,
     """ % (site_name, nick, comment, reply_nick, reply_comment,
            post_url)
     mail = MailSender(subject, body, service_name, receiver)
-    return mail.send()
-
-
-def mail_daily_hello():
-    """
-    站长每日问好
-    """
-    url = DAILY_HELLO['AISHICI_URL']
-    req = requests.get(url)
-    ret = req.json()
-    service_name = 'Hello，站长'
-    subject = random.choice(DAILY_HELLO['SUBJECTS'])
-    body = """
-    <div style="border-top:2px solid #12ADDB;box-shadow:0 1px 3px #AAAAAA;
-    line-height:180%%;padding:0 15px 12px;margin:50px auto;font-size:12px;">
-    <h2 style="border-bottom:1px solid #DDD;font-size:14px;font-weight:normal;
-    padding:13px 0 10px 8px;">今日诗词</h2><div style="background-color: #f5f5f5;
-    padding: 10px 15px;margin:18px 0;word-wrap:break-word;"><strong>%s</strong>
-    </div><p style=" text-indent: 2em;">作者：%s</p><p style=" text-indent: 2em;">
-    出处：《%s》</p><p style=" text-indent: 2em;">分类：%s</p></div>
-    """ % (ret['content'], ret['author'], ret['origin'], ret['category'])
-    mail = MailSender(subject, body, service_name, SITE_INFO['ADMIN_MAIL'])
-    mail.set_receiver_name(SITE_INFO['ADMIN_NAME'])
     return mail.send()

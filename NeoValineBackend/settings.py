@@ -119,33 +119,6 @@ REST_FRAMEWORK = {
 }
 
 
-# gushici
-# https://github.com/xenv/gushici
-DAILY_HELLO = {
-    "AISHICI_URL": 'https://v1.jinrishici.com/all.json',
-    "SUBJECTS": [
-        '又要开始元气满满的一天了！',
-        '早安~',
-        '世界，你好！',
-        '今天天气怎么样~',
-        'I am alive as yet, hhh',
-        '今天的诗词又是什么呢~',
-        '今天变得更好了吗~',
-        '外面阳光好像不错呢~',
-        '嗯哼，看谁来了~',
-        '你正在干什么呢~',
-        '好久不见',
-        '感觉已经好久没见了',
-        '最近有在写随笔吗',
-        '最近都新学了些什么鸭？',
-        '最近有在更博客吗？',
-        '最近有什么有趣的事情发生吗？',
-        '最近有做什么开心的事情吗？',
-        '最近有发生什么不开心的事情吗？'
-    ]
-}
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 

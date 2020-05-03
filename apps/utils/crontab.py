@@ -28,10 +28,3 @@ def check_notice():
                     return
             item.notified = True
             item.save()
-
-
-def daily_hello():
-    """
-    站长每日问好
-    """
-    mail_daily_hello()
