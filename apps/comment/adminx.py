@@ -42,7 +42,10 @@ class CommentModelAdmin(object):
                     return
             if obj.pid:
                 # 该评论是条回复
-                pre = CommentModel.objects.get(id=obj.pid, mail__isnull=False)
+                pre = CommentModel.objects.get(id=obj.pid,
+                                               url=obj.url,
+                                               display=True,
+                                               mail__isnull=False)
                 reply_notice_ret = \
                     mail_reply_notice(post_url=site_url+pre.url,
                                       receiver=pre.mail,
