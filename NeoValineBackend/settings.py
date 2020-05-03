@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'rest_framework',
     'django_filters',
-    'django_crontab',
     'apps.user.apps.UserConfig',
     'apps.comment.apps.CommentConfig',
 ]
@@ -64,8 +63,7 @@ ROOT_URLCONF = 'NeoValineBackend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -145,12 +143,6 @@ DAILY_HELLO = {
     ]
 }
 
-# Django-crontab
-# https://github.com/kraiz/django-crontab
-CRONJOBS = [
-    ('*/10 * * * *', 'apps.utils.crontab.check_notice'),
-    ('5 7 * * *', 'apps.utils.crontab.daily_hello')
-]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
