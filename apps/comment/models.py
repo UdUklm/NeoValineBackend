@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.db import models
 
 
@@ -27,7 +25,7 @@ class CommentModel(models.Model):
                               help_text='根id')
     ua = models.CharField(verbose_name='UA', max_length=256, blank=True,
                           null=True, help_text='UA')
-    ctime = models.DateTimeField(verbose_name='创建时间', default=datetime.now,
+    ctime = models.DateTimeField(verbose_name='创建时间', auto_now_add=True,
                                  help_text='创建时间')
 
     class Meta:

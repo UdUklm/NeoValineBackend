@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -10,7 +8,7 @@ class UserModel(AbstractUser):
     """
     email = models.EmailField(verbose_name='邮箱', blank=True, null=True,
                               help_text='邮箱')
-    ctime = models.DateTimeField(verbose_name='注册时间', default=datetime.now,
+    ctime = models.DateTimeField(verbose_name='注册时间', auto_now_add=True,
                                  help_text='注册时间')
 
     class Meta:
