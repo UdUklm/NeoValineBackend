@@ -17,7 +17,6 @@ class CommentModelAdmin(object):
     search_fields = ['id', 'url', 'comment', 'nick', 'mail', 'link', 'rid',
                      'pid', 'ip', 'ua']
     readonly_fields = ['id', 'url', 'rid', 'pid', 'ip', 'ua']
-    list_editable = ['display']
 
     def save_models(self):
         """
