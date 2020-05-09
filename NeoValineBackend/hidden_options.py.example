@@ -1,0 +1,17 @@
+HIDDEN_SECRET_KEY = '***'  # generate django secret_key by youself
+
+MAIL_SETTINGS = {
+    'SMTP_SERVER': 'smtp.example.com',
+    'PORT': '25',
+    'SSL_PORT': '465',  # if not QQ mail, change it
+    'USERNAME': 'mail@example.com',
+    'ADDRESS': 'mail@example.com',
+    'PASSWORD': 'example',
+}
+
+SITE_INFO = {
+    'SITE_URL': 'https://www.example.com',
+    'SITE_NAME': 'example',
+    'ADMIN_MAIL': 'me@example.com',
+    'ADMIN_NAME': 'example-站长',
+}
