@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = HIDDEN_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -126,8 +126,6 @@ REST_FRAMEWORK = {
     'DATETIME_FORMAT': 'rest_framework.ISO_8601',
 }
 
-print(BASE_DIR)
-print()
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -186,5 +184,8 @@ CORS_ALLOW_HEADERS = (
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+STATICFILES_DIRS = [
+  os.path.join(BASE_DIR, '/static/'),   # 修改地方
+]
 
 MEDIA_ROOT = os.path.join(BASE_DIR)

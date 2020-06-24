@@ -54,11 +54,8 @@ class MailSender:
 
         try:
             smtp = smtplib.SMTP_SSL(self.smtp_host, self.ssl_port)
-            state_chlo = smtp.ehlo()
-            print(state_chlo)
-            # (250, b'newxmesmtplogicsvrszb6.qq.com\nPIPELINING\nSIZE 73400320\nAUTH LOGIN PLAIN\nAUTH=LOGIN\nMAILCOMPRESS\n8BITMIME')
-            state_login = smtp.login(self.username, self.password)
-            print(state_login)
+            smtp.ehlo()
+            smtp.login(self.username, self.password)
             smtp.sendmail(self.sender_addr, receivers, mail.as_string())
             smtp.close()
             return True
@@ -153,7 +150,7 @@ def mail_reply_notice(post_url: str, receiver: str, nick: str,
 if __name__ == '__main__':
     "def mail_display_notice(post_url: str, receiver: str, comment: str) -> bool:"
     post_url = "lossyou.com"
-    receiver = '1721684479@qq.com'
+    receiver = ''
     comment = "过了"
     res = mail_display_notice(post_url, receiver, comment)
     print(res)
