@@ -7,4 +7,4 @@ venv
 NeoValineBackend/hidden_options.py
 **/migrations
 **/__pycache__
-static
+
