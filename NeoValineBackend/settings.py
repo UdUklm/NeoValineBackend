@@ -28,7 +28,8 @@ SECRET_KEY = HIDDEN_SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
 
 
 # Application definition
@@ -46,18 +47,25 @@ INSTALLED_APPS = [
     'django_filters',
     'apps.user.apps.UserConfig',
     'apps.comment.apps.CommentConfig',
+    'corsheaders',
 ]
 
 AUTH_USER_MODEL = 'user.UserModel'
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',# 默认
+    'django.contrib.sessions.middleware.SessionMiddleware', # 默认
+
+    'corsheaders.middleware.CorsMiddleware',# 默认
+    # 注意顺序，即在上一个的下面
+    'django.middleware.common.CommonMiddleware', # 新增 ✔
+
+    # 'django.middleware.csrf.CsrfViewMiddleware',# 默认
+    'django.contrib.auth.middleware.AuthenticationMiddleware',# 默认
+    'django.contrib.messages.middleware.MessageMiddleware', # 默认
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',# 默认
+    'django.middleware.common.CommonMiddleware',# 默认
+
 ]
 
 ROOT_URLCONF = 'NeoValineBackend.urls'
@@ -118,7 +126,8 @@ REST_FRAMEWORK = {
     'DATETIME_FORMAT': 'rest_framework.ISO_8601',
 }
 
-
+print(BASE_DIR)
+print()
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -130,6 +139,45 @@ USE_TZ = True  # 数据库存储的不是国际时间而是本地时间
 USE_I18N = True
 
 USE_L10N = True
+
+
+MIDDLEWARE_CLASSES = (
+
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',  # 注意顺序
+
+)
+#跨域增加忽略
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_WHITELIST = [
+#     '127.0.0.1',
+# ]
+
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+    'VIEW',
+)
+
+CORS_ALLOW_HEADERS = (
+    'XMLHttpRequest',
+    'X_FILENAME',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'Pragma',
+)
 
 
 # Static files (CSS, JavaScript, Images)
