@@ -1,7 +1,7 @@
 # NeoValineBackend
 [NeoValine](https://github.com/UdUklm/NeoValine/) 的后端，使用 Django + Xadmin + Django-REST-framework 实现
 
-## Test Run
+## How to use???
 
 ```bash
 # add hidden options file firstly

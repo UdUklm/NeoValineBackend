@@ -24,6 +24,9 @@ from apps.comment.views import CommentViewSet
 from apps.comment.views import ChildCommentViewSet
 from NeoValineBackend.settings import STATIC_ROOT
 
+from django.views import static  ##新增
+from django.conf import settings  ##新增
+from django.conf.urls import url  ##新增
 
 router = DefaultRouter()
 router.register(r'api/comment', CommentViewSet)
@@ -32,8 +35,16 @@ router.register(r'api/childcomment', ChildCommentViewSet)
 
 urlpatterns = [
     # path('api-auth/', include('rest_framework.urls')),
-    path(r'api/doc/', include_docs_urls(title='API Doc')),
+    # path(r'api/doc/', include_docs_urls(title='API Doc')),
     path(r'api/admin/', xadmin.site.urls),
     path(r'api/static/', serve, {'document_root': STATIC_ROOT}),
     path('', include(router.urls)),
+    url(r'^static/(?P<path>.*)$', static.serve,
+        {'document_root': settings.STATIC_ROOT}, name='static'),
 ]
+
+if __name__ == '__main__':
+    """
+    For Test
+    """
+    pass

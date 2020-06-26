@@ -12,8 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
-from .hidden_options import HIDDEN_SECRET_KEY
-
+from .hidden_options import HIDDEN_SECRET_KEY, DOMAIN_WHITE_LIST, TRUSTED_ORGINS, DEBUG_CONTROL
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,10 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = HIDDEN_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = DEBUG_CONTROL
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -46,18 +44,25 @@ INSTALLED_APPS = [
     'django_filters',
     'apps.user.apps.UserConfig',
     'apps.comment.apps.CommentConfig',
+    'corsheaders',
+    'rest_framework.authtoken'
 ]
 
 AUTH_USER_MODEL = 'user.UserModel'
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',            # 默认
+    'django.contrib.sessions.middleware.SessionMiddleware',     # 默认
+
+    'corsheaders.middleware.CorsMiddleware',                    # 默认
+    'django.middleware.common.CommonMiddleware',                # 新增
+
+    'django.middleware.csrf.CsrfViewMiddleware',              # 默认
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # 默认
+    'django.contrib.messages.middleware.MessageMiddleware',     # 默认
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',   # 默认
+    'django.middleware.common.CommonMiddleware',                # 默认
+
 ]
 
 ROOT_URLCONF = 'NeoValineBackend.urls'
@@ -116,8 +121,19 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DATETIME_FORMAT': 'rest_framework.ISO_8601',
-}
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',),
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'rest_framework.authentication.TokenAuthentication',
+    #     'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    #     'rest_framework.authentication.SessionAuthentication',
+    #     'rest_framework.authentication.BasicAuthentication',
+    # ),
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ),
 
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -132,11 +148,57 @@ USE_I18N = True
 USE_L10N = True
 
 
+MIDDLEWARE_CLASSES = (
+
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',  # 注意顺序
+
+)
+
+#  跨域增加忽略
+CORS_ALLOW_CREDENTIALS = True
+if DEBUG:
+    CORS_ORIGIN_ALLOW_ALL = True
+else:
+    # In this case you should add you api domain in the list
+    CORS_ORIGIN_WHITELIST = DOMAIN_WHITE_LIST
+CSRF_TRUSTED_ORIGINS = TRUSTED_ORGINS
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+    'VIEW',
+    'null',
+)
+
+CORS_ALLOW_HEADERS = (
+    'XMLHttpRequest',
+    'X_FILENAME',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'Pragma',
+    'null',
+)
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, '/static/'),   # 修改地方
+]
 
 MEDIA_ROOT = os.path.join(BASE_DIR)
