@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
-from .hidden_options import HIDDEN_SECRET_KEY, DOMAIN_WHITE_LIST, TRUSTED_ORGINS, DEBUG_CONTROL
+from .hidden_options import HIDDEN_SECRET_KEY, DOMAIN_WHITE_LIST, TRUSTED_ORGINS
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = HIDDEN_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = DEBUG_CONTROL
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -51,17 +51,15 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'user.UserModel'
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',            # 默认
-    'django.contrib.sessions.middleware.SessionMiddleware',     # 默认
-
-    'corsheaders.middleware.CorsMiddleware',                    # 默认
-    'django.middleware.common.CommonMiddleware',                # 新增
-
-    'django.middleware.csrf.CsrfViewMiddleware',              # 默认
-    'django.contrib.auth.middleware.AuthenticationMiddleware',  # 默认
-    'django.contrib.messages.middleware.MessageMiddleware',     # 默认
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',   # 默认
-    'django.middleware.common.CommonMiddleware',                # 默认
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 
 ]
 
@@ -122,17 +120,8 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DATETIME_FORMAT': 'rest_framework.ISO_8601',
     'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',),
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     'rest_framework.authentication.TokenAuthentication',
-    #     'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    #     'rest_framework.authentication.SessionAuthentication',
-    #     'rest_framework.authentication.BasicAuthentication',
-    # ),
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.permissions.IsAuthenticated',
-    # ),
-
+        'rest_framework.renderers.JSONRenderer',
+    ),
 }
 
 # Internationalization
@@ -149,7 +138,6 @@ USE_L10N = True
 
 
 MIDDLEWARE_CLASSES = (
-
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',  # 注意顺序
 
@@ -198,7 +186,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, '/static/'),   # 修改地方
+    os.path.join(BASE_DIR, '/static/'),
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR)

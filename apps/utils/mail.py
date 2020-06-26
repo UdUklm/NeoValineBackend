@@ -145,13 +145,3 @@ def mail_reply_notice(post_url: str, receiver: str, nick: str,
            post_url)
     mail = MailSender(subject, body, service_name, receiver)
     return mail.send()
-
-
-if __name__ == '__main__':
-    # "def mail_display_notice(post_url: str, receiver: str, comment: str) -> bool:"
-    # post_url = "*******"
-    # receiver = ''
-    # comment = "过了"
-    # res = mail_display_notice(post_url, receiver, comment)
-    # print(res)
-    pass
