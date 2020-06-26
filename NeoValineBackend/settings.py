@@ -12,8 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
-from .hidden_options import HIDDEN_SECRET_KEY
-
+from .hidden_options import HIDDEN_SECRET_KEY, DOMAIN_WHITE_LIST, TRUSTED_ORGINS, DEBUG_CONTROL
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = HIDDEN_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = DEBUG_CONTROL
 
 ALLOWED_HOSTS = ['*']
 
@@ -58,7 +57,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',                    # 默认
     'django.middleware.common.CommonMiddleware',                # 新增
 
-    # 'django.middleware.csrf.CsrfViewMiddleware',              # 默认
+    'django.middleware.csrf.CsrfViewMiddleware',              # 默认
     'django.contrib.auth.middleware.AuthenticationMiddleware',  # 默认
     'django.contrib.messages.middleware.MessageMiddleware',     # 默认
     'django.middleware.clickjacking.XFrameOptionsMiddleware',   # 默认
@@ -158,21 +157,12 @@ MIDDLEWARE_CLASSES = (
 
 #  跨域增加忽略
 CORS_ALLOW_CREDENTIALS = True
-# CORS_ORIGIN_ALLOW_ALL = True
 if DEBUG:
     CORS_ORIGIN_ALLOW_ALL = True
 else:
-    CORS_ORIGIN_WHITELIST = (
-        'http://127.0.0.1:4000',
-        'http://localhost:4000',
-        'https://comment.lossyou.com',
-        'http://127.0.0.1:8000',
-        'https://lossyou.com',
-    )
-CSRF_TRUSTED_ORIGINS = (
-    'localhost',
-    'lossyou.com',
-)
+    # In this case you should add you api domain in the list
+    CORS_ORIGIN_WHITELIST = DOMAIN_WHITE_LIST
+CSRF_TRUSTED_ORIGINS = TRUSTED_ORGINS
 
 CORS_ALLOW_METHODS = (
     'DELETE',
