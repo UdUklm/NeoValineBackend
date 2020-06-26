@@ -32,8 +32,6 @@ router = DefaultRouter()
 router.register(r'api/comment', CommentViewSet)
 router.register(r'api/childcomment', ChildCommentViewSet)
 
-from rest_framework.authtoken import views
-
 
 urlpatterns = [
     # path('api-auth/', include('rest_framework.urls')),
@@ -43,7 +41,6 @@ urlpatterns = [
     path('', include(router.urls)),
     url(r'^static/(?P<path>.*)$', static.serve,
         {'document_root': settings.STATIC_ROOT}, name='static'),
-    url(r'^token/', views.obtain_auth_token)
 ]
 
 if __name__ == '__main__':
