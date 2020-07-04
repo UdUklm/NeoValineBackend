@@ -7,7 +7,6 @@ class CommentSerializer(serializers.ModelSerializer):
     notified = serializers.BooleanField(read_only=True)
     display = serializers.BooleanField(read_only=True)
     ctime = serializers.DateTimeField(read_only=True, format=ISO_8601)
-    ip = serializers.IPAddressField(write_only=True)
 
     class Meta:
         model = CommentModel
