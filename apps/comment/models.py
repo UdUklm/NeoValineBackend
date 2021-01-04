@@ -16,10 +16,14 @@ class CommentModel(models.Model):
                                    help_text='已通知')
     display = models.BooleanField(verbose_name='能显示', default=False,
                                   help_text='能显示')
+    ip = models.GenericIPAddressField(verbose_name='IP', blank=True, null=True,
+                                      help_text='IP')
     pid = models.IntegerField(verbose_name='前id', blank=True, null=True,
                               help_text='前id')
     rid = models.IntegerField(verbose_name='根id', blank=True, null=True,
                               help_text='根id')
+    ua = models.CharField(verbose_name='UA', max_length=256, blank=True,
+                          null=True, help_text='UA')
     ctime = models.DateTimeField(verbose_name='创建时间', auto_now_add=True,
                                  help_text='创建时间')
 
