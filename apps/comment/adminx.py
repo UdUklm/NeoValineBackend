@@ -9,14 +9,14 @@ from NeoValineBackend.hidden_options import SITE_INFO
 class CommentModelAdmin(object):
     # 定义显示的属性
     list_display = ['id', 'url', 'comment', 'nick', 'mail', 'link',
-                    'notified', 'display', 'rid', 'pid', 'ip', 'ua', 'ctime']
+                    'notified', 'display', 'rid', 'pid', 'ctime']
     # 定义过滤器用于筛选数据, 注意外键的写法是:外键名__外键的某个属性, 才能正常显示过滤, 注意下划线有两个
     list_filter = ['notified', 'display', 'id', 'url', 'comment', 'nick',
-                   'mail', 'link', 'rid', 'pid', 'ip', 'ua', 'ctime']
+                   'mail', 'link', 'rid', 'pid', 'ctime']
     # 定义可搜索的范围, 不能设置时间, 涉及外键的时候和上面一样处理
     search_fields = ['id', 'url', 'comment', 'nick', 'mail', 'link', 'rid',
-                     'pid', 'ip', 'ua']
-    readonly_fields = ['id', 'url', 'rid', 'pid', 'ip', 'ua']
+                     'pid']
+    readonly_fields = ['id', 'url', 'rid', 'pid']
 
     def save_models(self):
         """
