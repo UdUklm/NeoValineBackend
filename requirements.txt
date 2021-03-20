@@ -19,7 +19,7 @@ httplib2==0.18.0
 idna==2.9
 itypes==1.2.0
 jdcal==1.4.1
-Jinja2==2.11.2
+Jinja2==2.11.3
 MarkupPy==1.14
 MarkupSafe==1.1.1
 odfpy==1.4.1
